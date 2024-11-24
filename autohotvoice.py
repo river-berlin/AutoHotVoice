@@ -15,7 +15,7 @@ import json
 load_dotenv()
 
 
-class SpeechToFile:
+class AutoHotVoice:
     """
     A class for recording live speech, transcribing it using Deepgram API,
     and saving the final transcriptions to a file. After transcription,
@@ -25,7 +25,7 @@ class SpeechToFile:
 
     def __init__(self, api_key, output_file="transcriptions.txt"):
         """
-        Initializes the SpeechToFile object.
+        Initializes the AutoHotVoice object.
 
         Args:
             api_key (str): The API key for the Deepgram service.
@@ -249,8 +249,8 @@ if __name__ == "__main__":
     if not DEEPGRAM_API_KEY:
         raise ValueError("DEEPGRAM_API_KEY is not set in the environment.")
 
-    # Initialize the SpeechToFile class
-    speech_recorder = SpeechToFile(api_key=DEEPGRAM_API_KEY, output_file="speech_log.txt")
+    # Initialize the AutoHotVoice class
+    speech_recorder = AutoHotVoice(api_key=DEEPGRAM_API_KEY, output_file="speech_log.txt")
 
     # Register hooks with custom schemas
     speech_recorder.add_hook(

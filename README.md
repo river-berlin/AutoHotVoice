@@ -1,8 +1,23 @@
-# AutoHotVoice 🎙️
-_Automate Your Computer Using Voice Commands_
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="static/readme_image_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="static/readme_image.png">
+    <img alt="A person singing in a microphone" src="static/readme_image.png" width="200" height="200" style="max-width: 100%;">
+  </picture>
+</p>
 
-<img src="static/README_image.jpg" alt="A person singing in a microphone" width="200" height="200">
+<p align="center">
+  AutoHotVoice 🎙️  
+  <br>
+  Automate Your Computer Using Voice Commands
+</p>
 
+<p align="center">
+    <a href="#"><img src="https://img.shields.io/badge/release-alpha-redπ" alt="Beta Release"></a>
+    <a href="https://github.com/river-berlin/AutoHotVoice/blob/main/LICENSE"><img src="https://img.shields.io/github/license/river-berlin/AutoHotVoice" alt="License: MIT"></a>
+</p>
+
+---
 
 ## Overview
 
