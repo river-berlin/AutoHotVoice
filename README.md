@@ -1,8 +1,8 @@
 # AutoHotVoice 🎙️
-
 _Automate Your Computer Using Voice Commands_
 
----
+<img src="static/README_image.jpg" alt="A person singing in a microphone" width="200" height="200">
+
 
 ## Overview
 
@@ -44,27 +44,11 @@ AutoHotVoice integrates **Google Gemini** and **DeepGram** to provide seamless v
 
 1. Launch the script:
    ```bash
-   python autohotvoice.py
+   sudo python autohotvoice.py
    ```
 
 2. Press the Shift key to enable voice commands.
 3. Speak your command to control your computer.
 
-## Customization Options
-
-Edit the `config.py` file to adjust:
-- Voice command triggers
-- Corresponding actions
-- Additional integrations
-
-Here’s an example configuration snippet from `config.py`:
-
-```python
-COMMANDS = {
-   "open browser": "start chrome",
-   "play music": "start spotify",
-   "shutdown": "shutdown /s /t 1"
-}
-```
-
-Enjoy Automating! 🎉
+---
+Happy Automating! 🎉
