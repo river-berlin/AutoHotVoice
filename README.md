@@ -13,6 +13,8 @@ Automate Your Computer Using Voice Commands
 [![Beta Release](https://img.shields.io/badge/release-alpha-redπ)](#)
 [![License: MIT](https://img.shields.io/github/license/river-berlin/AutoHotVoice)](https://github.com/river-berlin/AutoHotVoice/blob/main/LICENSE)
 
+Note : This project is in the Alpha stage
+
 
 ## Overview
 
