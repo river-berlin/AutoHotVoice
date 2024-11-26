@@ -1,4 +1,4 @@
-from src.autohotvoice import AutoHotVoice
+from src.autohotvoice.autohotvoice import AutoHotVoice
 from dotenv import load_dotenv
 import os
 import google.generativeai as genai

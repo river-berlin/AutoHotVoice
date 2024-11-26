@@ -167,3 +167,5 @@ test.wav
 
 # macos thingamie
 .DS_Store
+
+speech_log.txt

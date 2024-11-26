@@ -8,27 +8,6 @@ bytes-like object.
 
 Classes:
     - AudioRecorder: A class for managing microphone audio recording.
-
-Example:
-    The following example demonstrates how to use the `AudioRecorder` class 
-    to record and save audio to a file:
-    
-    .. code-block:: python
-
-        from audio_recorder import AudioRecorder
-
-        recorder = AudioRecorder(sample_rate=16000, channels=1)
-
-        # Start recording
-        recorder.start()
-        input("Recording... Press Enter to stop.")  # Wait for user input to stop
-        audio_data = recorder.stop()
-
-        # Save the recorded audio to a file
-        recorder.save("output.wav")
-
-        # Alternatively, get the audio data as a BytesIO object
-        audio_bytes = audio_data
 """
 
 import io
@@ -51,6 +30,27 @@ class AudioRecorder:
         stream (sounddevice.InputStream): The audio input stream.
         is_recording (bool): Indicates if the recording is in progress.
         audio_frames (list): List to store audio frames during recording.
+
+    Example:
+        The following example demonstrates how to use the `AudioRecorder` class 
+        to record and save audio to a file:
+
+        .. code-block:: python
+
+            from audio_recorder import AudioRecorder
+
+            recorder = AudioRecorder(sample_rate=16000, channels=1)
+
+            # Start recording
+            recorder.start()
+            input("Recording... Press Enter to stop.")  # Wait for user input to stop
+            audio_data = recorder.stop()
+
+            # Save the recorded audio to a file
+            recorder.save("output.wav")
+
+            # Alternatively, get the audio data as a BytesIO object
+            audio_bytes = audio_data
     """
 
     def __init__(self, sample_rate=16000, channels=1):
