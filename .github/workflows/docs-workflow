@@ -2,17 +2,17 @@ name: Deploy Sphinx documentation to Pages
 
 on:
   push:
-    branches: [main] # branch to trigger deployment
+    branches: [master] # branch to trigger deployment
 
 jobs:
   pages:
     runs-on: ubuntu-20.04
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    permissions:
-      pages: write
-      id-token: write
     steps:
     - id: deployment
       uses: sphinx-notes/pages@v3
+      with:
+        publish: false
+    - uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ${{ steps.deployment.outputs.artifact }}
