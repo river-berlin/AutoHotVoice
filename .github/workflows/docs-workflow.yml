@@ -5,15 +5,9 @@ on:
   schedule:
     - cron: "22 22 * * *"
   workflow_dispatch:
-  release:  # Trigger on all release events
-    types:
-      - created
-      - published
-      - edited
-      - deleted
-      - prereleased
-      - released
-      - unpublished
+
+permissions:
+  contents: write  # Grant write permissions to content
 
 jobs:
   pages:
