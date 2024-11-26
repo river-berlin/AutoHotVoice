@@ -219,10 +219,11 @@ yarl = "1.18.0"
 [tool.poetry.group.dev.dependencies]
 black = "^24.10.0"
 pytest = "^8.3.3"
+poethepoet = "^0.31.1"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.poetry.scripts]
-format = "black:main"
+[tool.poe.tasks]
+format = "black ."

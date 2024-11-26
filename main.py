@@ -10,14 +10,20 @@ load_dotenv()
 # configure gemini
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
-autohotvoice = AutoHotVoice(api_key=os.environ["DEEPGRAM_API_KEY"], output_file="speech_log.txt")
+autohotvoice = AutoHotVoice(
+    api_key=os.environ["DEEPGRAM_API_KEY"], output_file="speech_log.txt"
+)
+
 
 # Define the callback function for text insertion
 def insert_text_callback(hook_result):
     # Log the text for debugging
-    print(f"Callback executed for INSERT_TEXT with transcription: {hook_result["inserted_text"]}")
+    print(
+        f"Callback executed for INSERT_TEXT with transcription: {hook_result["inserted_text"]}"
+    )
     # Simulate typing the text using pyautogui
     pyautogui.typewrite(hook_result["inserted_text"])
+
 
 # Register hooks with custom schemas
 autohotvoice.add_hook(
@@ -34,5 +40,7 @@ autohotvoice.add_hook(
 )
 
 # Start the speech recording process
-print("Starting AutoHotKey system. Press 'Right Shift' to start recording, and release to stop.")
+print(
+    "Starting AutoHotKey system. Press 'Right Shift' to start recording, and release to stop."
+)
 autohotvoice.start()

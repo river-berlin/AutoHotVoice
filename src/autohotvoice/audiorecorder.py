@@ -20,8 +20,8 @@ class AudioRecorder:
     """
     A class for recording audio from the microphone.
 
-    This class uses the `sounddevice` library to capture audio input and the 
-    `soundfile` library to handle audio file creation. It supports saving 
+    This class uses the `sounddevice` library to capture audio input and the
+    `soundfile` library to handle audio file creation. It supports saving
     audio data to a file or returning it as a bytes-like object.
 
     Attributes:
@@ -32,7 +32,7 @@ class AudioRecorder:
         audio_frames (list): List to store audio frames during recording.
 
     Example:
-        The following example demonstrates how to use the `AudioRecorder` class 
+        The following example demonstrates how to use the `AudioRecorder` class
         to record and save audio to a file:
 
         .. code-block:: python
@@ -95,7 +95,7 @@ class AudioRecorder:
         self.stream = sd.InputStream(
             samplerate=self.sample_rate,
             channels=self.channels,
-            dtype='float32',
+            dtype="float32",
             callback=self._callback,
         )
         self.stream.start()
@@ -124,8 +124,12 @@ class AudioRecorder:
         # Save the recorded audio to a BytesIO object in WAV format using SoundFile
         audio_buffer = io.BytesIO()
         with sf.SoundFile(
-            audio_buffer, mode='x', samplerate=self.sample_rate,
-            channels=self.channels, format='WAV', subtype='PCM_16'
+            audio_buffer,
+            mode="x",
+            samplerate=self.sample_rate,
+            channels=self.channels,
+            format="WAV",
+            subtype="PCM_16",
         ) as sf_file:
             sf_file.write(audio_data)
 
@@ -144,10 +148,12 @@ class AudioRecorder:
             RuntimeError: If a recording is in progress.
         """
         if self.is_recording:
-            raise RuntimeError("Cannot save while recording is in progress. Stop the recording first.")
+            raise RuntimeError(
+                "Cannot save while recording is in progress. Stop the recording first."
+            )
 
         # Combine all recorded frames into a single NumPy array
         audio_data = np.concatenate(self.audio_frames, axis=0)
 
         # Save the audio data to a file using SoundFile
-        sf.write(filename, audio_data, self.sample_rate, format='WAV', subtype='PCM_16')
+        sf.write(filename, audio_data, self.sample_rate, format="WAV", subtype="PCM_16")

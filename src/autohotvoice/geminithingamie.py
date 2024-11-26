@@ -1,6 +1,7 @@
 import google.generativeai as genai
 import json
 
+
 class GeminiThingamie:
     """
     Handles interaction with the Gemini API to process transcriptions and evaluate hooks.

@@ -10,6 +10,7 @@ Classes:
 - AutoHotVoice: A class for recording live speech, transcribing it using Deepgram API, and 
   invoking GeminiThingamie for hook-based task execution.
 """
+
 import time
 from typing import Callable, Dict, Any
 from deepgram import (
@@ -93,14 +94,23 @@ class AutoHotVoice:
     def validate_hook_name(self, name: str):
         """Validates the hook name format."""
         if not name.isupper() or not all(c.isalnum() or c == "_" for c in name):
-            raise ValueError("Hook name must be in uppercase letters and can only contain underscores.")
+            raise ValueError(
+                "Hook name must be in uppercase letters and can only contain underscores."
+            )
 
     def write_to_file(self, text):
         """Appends the given text to the output file."""
         with open(self.output_file, "a") as f:
             f.write(text + "\n")
 
-    def add_hook(self, name: str, task: str, description: str, callback: Callable[[str], Any], schema: dict = None):
+    def add_hook(
+        self,
+        name: str,
+        task: str,
+        description: str,
+        callback: Callable[[str], Any],
+        schema: dict = None,
+    ):
         """
         Adds a hook to be executed based on GeminiThingamie's response.
 
@@ -154,7 +164,9 @@ class AutoHotVoice:
                     after = datetime.now()
                     print(f"Transcribed in {after - before}")
 
-                    final_transcription = response["results"]["channels"][0]["alternatives"][0]["transcript"]
+                    final_transcription = response["results"]["channels"][0][
+                        "alternatives"
+                    ][0]["transcript"]
                     self.invoke_gemini(final_transcription)
 
             time.sleep(0.1)
