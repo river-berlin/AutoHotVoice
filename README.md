@@ -6,18 +6,13 @@
   </picture>
 </p>
 
-<p align="center">
-  <h1 style="text-align: center; border: none; text-decoration: none; margin-bottom: 0;">AutoHotVoice 🎙️</h1>
-  <p style="text-align: center; margin: 0; text-decoration: none;">Automate Your Computer Using Voice Commands</p>
-</p>
+# AutoHotVoice 🎙️
 
-<p align="center">
-    <a href="#"><img src="https://img.shields.io/badge/release-alpha-redπ" alt="Beta Release"></a>
-    <a href="https://github.com/river-berlin/AutoHotVoice/blob/main/LICENSE"><img src="https://img.shields.io/github/license/river-berlin/AutoHotVoice" alt="License: MIT"></a>
-</p>
+Automate Your Computer Using Voice Commands
 
----
----
+[![Beta Release](https://img.shields.io/badge/release-alpha-redπ)](#)
+[![License: MIT](https://img.shields.io/github/license/river-berlin/AutoHotVoice)](https://github.com/river-berlin/AutoHotVoice/blob/main/LICENSE)
+
 
 ## Overview
 
