@@ -1,5 +1,3 @@
-name: Deploy Sphinx documentation to Pages
-
 on:
   push:
     branches:
@@ -7,16 +5,25 @@ on:
   schedule:
     - cron: "22 22 * * *"
   workflow_dispatch:
+  release:  # Trigger on all release events
+    types:
+      - created
+      - published
+      - edited
+      - deleted
+      - prereleased
+      - released
+      - unpublished
 
 jobs:
   pages:
     runs-on: ubuntu-20.04
     steps:
-    - id: deployment
-      uses: sphinx-notes/pages@v3
-      with:
-        publish: false
-    - uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ${{ steps.deployment.outputs.artifact }}
+      - id: deployment
+        uses: sphinx-notes/pages@v3
+        with:
+          publish: false
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ${{ steps.deployment.outputs.artifact }}
