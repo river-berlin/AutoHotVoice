@@ -78,7 +78,11 @@ load_dotenv()
 
 genai.configure(api_key=os.environ["GEMINI_API_KEY"]) #setup gemini
 
-autohotvoice = AutoHotVoice(api_key=os.environ["DEEPGRAM_API_KEY"], output_file="speech_log.txt")
+autohotvoice = AutoHotVoice(
+    f"You're a friendly chatbot, A user has asked you for stuff based on the following transcription, reply with what the user probably wants here, Thanks, appreciate youuuuu :), -- transcription :",
+    api_key=os.environ["DEEPGRAM_API_KEY"], 
+    output_file="speech_log.txt"
+)
 
 def insert_text_callback(hook_result):
     print(f"Callback executed for INSERT_TEXT with transcription: {hook_result['inserted_text']}")

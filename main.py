@@ -13,6 +13,7 @@ load_dotenv()
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
 autohotvoice = AutoHotVoice(
+    f"You're a friendly chatbot, A user has asked you for stuff based on the following transcription, reply with what the user probably wants here, Thanks, appreciate youuuuu :), -- transcription :",
     api_key=os.environ["DEEPGRAM_API_KEY"], output_file="speech_log.txt"
 )
 

@@ -1,13 +1,12 @@
 import google.generativeai as genai
 import json
 
-
 class GeminiThingamie:
     """
     Handles interaction with the Gemini API to process transcriptions and evaluate hooks.
     """
 
-    def __init__(self, model_name="gemini-1.5-flash-latest"):
+    def __init__(self, base_transcription: str, model_name="gemini-1.5-flash-latest"):
         """
         Initializes the GeminiThingamie.
 
@@ -15,6 +14,10 @@ class GeminiThingamie:
             model_name (str): The name of the Gemini model to use.
         """
         self.model_name = model_name
+        self.base_transcription = base_transcription
+    
+    def set_base_transcription(self, base_transcription : str):
+        self.base_transcription = base_transcription
 
     def process_transcription(self, transcription: str, hooks: dict):
         """
@@ -46,7 +49,7 @@ class GeminiThingamie:
         try:
             model = genai.GenerativeModel(self.model_name)
             response = model.generate_content(
-                f"You're a friendly chatbot, A user has asked you for stuff based on the following transcription : {transcription}, what would the user probably want?",
+                f"{self.base_transcription} {transcription}",
                 generation_config=genai.GenerationConfig(
                     response_mime_type="application/json",
                     response_schema=schema,

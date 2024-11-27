@@ -76,14 +76,16 @@ class AutoHotVoice:
             autohotvoice.start()
     """
 
-    def __init__(self, api_key, output_file="transcriptions.txt"):
+    def __init__(self, base_transcript : str, api_key, output_file="transcriptions.txt"):
         """
         Initializes the AutoHotVoice object.
 
         Args:
+            base_transcript (str): The base transcript provided to AutoHotVoice
             api_key (str): The API key for the Deepgram service.
             output_file (str): The file where transcriptions will be saved.
         """
+        self.base_transcript = base_transcript
         self.api_key = api_key
         self.output_file = output_file
         self.mid_sentences = []  # Temporarily stores mid-sentences
@@ -91,7 +93,7 @@ class AutoHotVoice:
         self.deepgram = DeepgramClient(api_key)  # Initialize Deepgram client
         self.is_recording = False  # Tracks recording state
         self.hooks: Dict[str, Dict[str, Any]] = {}  # Stores hooks
-        self.gemini_thingamie = GeminiThingamie()  # Initialize GeminiThingamie
+        self.gemini_thingamie = GeminiThingamie(self.base_transcript)  # Initialize GeminiThingamie
         pygame.mixer.init(frequency=44100, size=-16, channels=2, buffer=512)
 
     def validate_hook_name(self, name: str):
@@ -197,4 +199,5 @@ class AutoHotVoice:
             return
 
         self.write_to_file("Invoked with: " + transcription)
+        self.gemini_thingamie.set_base_transcription(self.base_transcript)
         self.gemini_thingamie.process_transcription(transcription, self.hooks)
