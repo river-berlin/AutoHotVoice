@@ -23,6 +23,8 @@ import httpx
 from datetime import datetime
 from .audiorecorder import AudioRecorder
 from .geminithingamie import GeminiThingamie
+import pygame
+import os
 
 
 class AutoHotVoice:
@@ -90,6 +92,7 @@ class AutoHotVoice:
         self.is_recording = False  # Tracks recording state
         self.hooks: Dict[str, Dict[str, Any]] = {}  # Stores hooks
         self.gemini_thingamie = GeminiThingamie()  # Initialize GeminiThingamie
+        pygame.mixer.init(frequency=44100, size=-16, channels=2, buffer=512)
 
     def validate_hook_name(self, name: str):
         """Validates the hook name format."""
@@ -136,14 +139,23 @@ class AutoHotVoice:
         recorder = AudioRecorder(sample_rate=16000, channels=1)
         print("Press 'Right Shift' to start recording.")
 
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        sounds_dir = os.path.join(base_dir, "sounds")
+
+        sound1 = pygame.mixer.Sound(os.path.join(sounds_dir, "ping.mp3"))
+        sound2 = pygame.mixer.Sound(os.path.join(sounds_dir, "ping-2.mp3"))
+
         while True:
+            # Updated code snippet
             if keyboard.is_pressed("right shift"):
                 if not self.is_recording:
                     self.is_recording = True
+                    sound1.play()  # Play ping sound
                     recorder.start()
             else:
                 if self.is_recording:
                     self.is_recording = False
+                    sound2.play()  # Play ping-2 sound
                     audio_buffer = recorder.stop()
                     recorder.save("test.wav")
 
@@ -167,7 +179,9 @@ class AutoHotVoice:
                     final_transcription = response["results"]["channels"][0][
                         "alternatives"
                     ][0]["transcript"]
-                    self.invoke_gemini(final_transcription)
+                    
+                    if final_transcription.strip():
+                        self.invoke_gemini(final_transcription)
 
             time.sleep(0.1)
 

@@ -164,6 +164,7 @@ cython_debug/
 # for my own testing purposes
 test_script.py
 test.wav
+voiceify.sh
 
 # macos thingamie
 .DS_Store

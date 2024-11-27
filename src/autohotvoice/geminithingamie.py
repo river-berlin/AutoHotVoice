@@ -46,7 +46,7 @@ class GeminiThingamie:
         try:
             model = genai.GenerativeModel(self.model_name)
             response = model.generate_content(
-                f"Determine which of the following hooks were invoked in this transcription: {transcription}.",
+                f"You're a friendly chatbot, A user has asked you for stuff based on the following transcription : {transcription}, what would the user probably want?",
                 generation_config=genai.GenerationConfig(
                     response_mime_type="application/json",
                     response_schema=schema,
