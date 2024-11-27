@@ -53,7 +53,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-autohotvoice.geminithingamie">autohotvoice.geminithingamie module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#autohotvoice.geminithingamie.GeminiThingamie"><code class="docutils literal notranslate"><span class="pre">GeminiThingamie</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#autohotvoice.geminithingamie.GeminiThingamie.process_transcription"><code class="docutils literal notranslate"><span class="pre">GeminiThingamie.process_transcription()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#autohotvoice.geminithingamie.GeminiThingamie.set_base_transcription"><code class="docutils literal notranslate"><span class="pre">GeminiThingamie.set_base_transcription()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autohotvoice.geminithingamie.GeminiThingamie.set_base_transcript"><code class="docutils literal notranslate"><span class="pre">GeminiThingamie.set_base_transcript()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -116,7 +116,7 @@
 <span id="autohotvoice-geminithingamie-module"></span><h2>autohotvoice.geminithingamie module<a class="headerlink" href="#module-autohotvoice.geminithingamie" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="autohotvoice.geminithingamie.GeminiThingamie">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">autohotvoice.geminithingamie.</span></span><span class="sig-name descname"><span class="pre">GeminiThingamie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_transcription</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gemini-1.5-flash-latest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autohotvoice.geminithingamie.GeminiThingamie" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">autohotvoice.geminithingamie.</span></span><span class="sig-name descname"><span class="pre">GeminiThingamie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_transcript</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gemini-1.5-flash-latest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autohotvoice.geminithingamie.GeminiThingamie" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Handles interaction with the Gemini API to process transcriptions and evaluate hooks.</p>
 <dl class="py method">
@@ -131,8 +131,8 @@ hooks (dict): A dictionary of registered hooks.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="autohotvoice.geminithingamie.GeminiThingamie.set_base_transcription">
-<span class="sig-name descname"><span class="pre">set_base_transcription</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_transcription</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autohotvoice.geminithingamie.GeminiThingamie.set_base_transcription" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="autohotvoice.geminithingamie.GeminiThingamie.set_base_transcript">
+<span class="sig-name descname"><span class="pre">set_base_transcript</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_transcript</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#autohotvoice.geminithingamie.GeminiThingamie.set_base_transcript" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
