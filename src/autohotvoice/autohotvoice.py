@@ -76,7 +76,7 @@ class AutoHotVoice:
             autohotvoice.start()
     """
 
-    def __init__(self, base_transcript : str, api_key, output_file="transcriptions.txt"):
+    def __init__(self, base_transcript: str, api_key, output_file="transcriptions.txt"):
         """
         Initializes the AutoHotVoice object.
 
@@ -85,7 +85,7 @@ class AutoHotVoice:
             api_key (str): The API key for the Deepgram service.
             output_file (str): The file where transcriptions will be saved.
         """
-        self.base_transcript = base_transcript
+        self._base_transcript = base_transcript
         self.api_key = api_key
         self.output_file = output_file
         self.mid_sentences = []  # Temporarily stores mid-sentences
@@ -93,8 +93,20 @@ class AutoHotVoice:
         self.deepgram = DeepgramClient(api_key)  # Initialize Deepgram client
         self.is_recording = False  # Tracks recording state
         self.hooks: Dict[str, Dict[str, Any]] = {}  # Stores hooks
-        self.gemini_thingamie = GeminiThingamie(self.base_transcript)  # Initialize GeminiThingamie
+        self.gemini_thingamie = GeminiThingamie(
+            self.base_transcript
+        )  # Initialize GeminiThingamie
+        self.release_hooks = []
         pygame.mixer.init(frequency=44100, size=-16, channels=2, buffer=512)
+
+    @property
+    def base_transcript(self):
+        return self._base_transcript
+
+    @base_transcript.setter
+    def base_transcript(self, value):
+        self._base_transcript = value
+        self.gemini_thingamie.base_transcript = value
 
     def validate_hook_name(self, name: str):
         """Validates the hook name format."""
@@ -134,6 +146,16 @@ class AutoHotVoice:
             "schema": schema or {},
         }
 
+    def add_release_hook(self, callback):
+        """Register a function to be called before the user starts speaking.
+
+        This function is called every time the user releases the trigger button.
+
+        Args:
+            callback: The function to be called. It will be called with no arguments.
+        """
+        self.release_hooks.append(callback)
+
     def start(self):
         """
         Starts the speech recording and transcription process.
@@ -150,6 +172,7 @@ class AutoHotVoice:
         while True:
             # Updated code snippet
             if keyboard.is_pressed("right shift"):
+
                 if not self.is_recording:
                     self.is_recording = True
                     sound1.play()  # Play ping sound
@@ -157,6 +180,11 @@ class AutoHotVoice:
             else:
                 if self.is_recording:
                     self.is_recording = False
+
+                    # execute the release hooks
+                    for hook in self.release_hooks:
+                        hook()
+
                     sound2.play()  # Play ping-2 sound
                     audio_buffer = recorder.stop()
                     recorder.save("test.wav")
@@ -181,7 +209,7 @@ class AutoHotVoice:
                     final_transcription = response["results"]["channels"][0][
                         "alternatives"
                     ][0]["transcript"]
-                    
+
                     if final_transcription.strip():
                         self.invoke_gemini(final_transcription)
 
@@ -199,5 +227,5 @@ class AutoHotVoice:
             return
 
         self.write_to_file("Invoked with: " + transcription)
-        self.gemini_thingamie.set_base_transcription(self.base_transcript)
+        self.gemini_thingamie.set_base_transcript(self.base_transcript)
         self.gemini_thingamie.process_transcription(transcription, self.hooks)

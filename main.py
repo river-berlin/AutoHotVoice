@@ -14,7 +14,8 @@ genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
 autohotvoice = AutoHotVoice(
     f"You're a friendly chatbot, A user has asked you for stuff based on the following transcription, reply with what the user probably wants here, Thanks, appreciate youuuuu :), -- transcription :",
-    api_key=os.environ["DEEPGRAM_API_KEY"], output_file="speech_log.txt"
+    api_key=os.environ["DEEPGRAM_API_KEY"],
+    output_file="speech_log.txt",
 )
 
 
@@ -75,6 +76,33 @@ autohotvoice.add_hook(
     callback=insert_text_callback,  # Callback function to handle the request
     schema=insert_text_schema,
 )
+
+
+def pass_current_selection():
+    """Passes the current selection to AutoHotVoice.
+
+    This function copies the currently selected text to the clipboard and passes it to Gemini.
+    """
+    # Determine the user's operating system
+    os_type = platform.system()
+
+    # Determine the appropriate modifier key (Command for macOS, Control otherwise)
+    if os_type == "Darwin":  # macOS
+        modifier_key = "command"
+    else:  # Windows or Linux
+        modifier_key = "ctrl"
+
+    # Use a context manager to hold the appropriate modifier key and press 'V' to paste
+    with pyautogui.hold(modifier_key):
+        pyautogui.press("c")
+
+    autohotvoice.base_transcript = (
+        f"The user has currently copied the following text into their clipboard - This may or may not be relevant, They might refer to this as the 'selected content' - Clipboard contents: {pyperclip.paste()}, "
+        + f"You're a friendly chatbot, A user has asked you for stuff based on the following transcription, reply with what the user probably wants here, Thanks, appreciate youuuuu :), -- transcription :",
+    )
+
+
+autohotvoice.add_release_hook(pass_current_selection)
 
 # Start the speech recording process
 print(

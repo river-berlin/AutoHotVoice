@@ -1,12 +1,13 @@
 import google.generativeai as genai
 import json
 
+
 class GeminiThingamie:
     """
     Handles interaction with the Gemini API to process transcriptions and evaluate hooks.
     """
 
-    def __init__(self, base_transcription: str, model_name="gemini-1.5-flash-latest"):
+    def __init__(self, base_transcript: str, model_name="gemini-1.5-flash-latest"):
         """
         Initializes the GeminiThingamie.
 
@@ -14,10 +15,10 @@ class GeminiThingamie:
             model_name (str): The name of the Gemini model to use.
         """
         self.model_name = model_name
-        self.base_transcription = base_transcription
-    
-    def set_base_transcription(self, base_transcription : str):
-        self.base_transcription = base_transcription
+        self.base_transcript = base_transcript
+
+    def set_base_transcript(self, base_transcript: str):
+        self.base_transcript = base_transcript
 
     def process_transcription(self, transcription: str, hooks: dict):
         """
@@ -48,8 +49,9 @@ class GeminiThingamie:
 
         try:
             model = genai.GenerativeModel(self.model_name)
+            print(self.base_transcript, transcription)
             response = model.generate_content(
-                f"{self.base_transcription} {transcription}",
+                f"{self.base_transcript} {transcription}",
                 generation_config=genai.GenerationConfig(
                     response_mime_type="application/json",
                     response_schema=schema,
